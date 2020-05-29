@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2020_05_29_184709) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "individualGoal"
-    t.float "monthlyGoal"
+    t.float "individualGoal", default: 0.0
+    t.float "monthlyGoal", default: 0.0
   end
 
 end
