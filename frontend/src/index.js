@@ -4,8 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
         
         const dropDown = document.getElementById('calc')
         dropDown.addEventListener("change", function() {select(dropDown)});
-        fetchCalculators();
         
+        async function f() {
+            await fetchCalculators();
+            select(dropDown)();
+        }
+        
+        f();
 })
 
 function fetchCalculators() {
@@ -25,11 +30,10 @@ function calculators(json) {
 }
 
 function calculator(json) {
-    const main = document.getElementById('current')
-    main.innerHTML = json["name"];
-    const div = document.createElement('div');
+    const h1 = document.getElementById('current')
+    h1.innerHTML = json["name"];
+    const div = document.getElementById('info');
     div.innerHTML = `Individual Goal: ${json["individualGoal"]}`+` Monthly Goal: ${json["monthlyGoal"]}`
-    main.appendChild(div)
 }
 
 function select(dropDown) {
