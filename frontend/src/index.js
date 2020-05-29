@@ -27,6 +27,12 @@ function calculators(json) {
 function calculator(json) {
     const main = document.getElementById('current')
     main.innerHTML = json["name"];
+    const div = document.createElement('div');
+    if (!!json["individualGoal"]||json["monthlyGoal"]) {
+        div.innerHTML = `Individual Goal: ${json["individualGoal"]}`+` Monthly Goal: ${json["monthlyGoal"]}`
+    }
+    else {div.innerHTML = ""}
+    main.appendChild(div)
 }
 
 function select(dropDown) {

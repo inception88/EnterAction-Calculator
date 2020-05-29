@@ -9,7 +9,7 @@ class CalculatorsController < ApplicationController
         if calculator
           render json: { id: calculator.id, name: calculator.name, individualGoal: calculator.individualGoal, monthlyGoal: calculator.monthlyGoal }
         else
-          render json: { message: 'Calculator not found' }
+          render json: { name: 'Calculator not found' }
         end
       end
 
