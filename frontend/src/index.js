@@ -7,9 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
         
         async function f() {
             await fetchCalculators();
-            select(dropDown)();
+            select(dropDown);
         }
-        
         f();
 })
 
