@@ -1,19 +1,28 @@
-console.log("In dere!")
-
 const BACKEND_URL = 'http://localhost:3000';
-fetch(`${BACKEND_URL}/test`)
-  .then(response => response.json())
-  .then(parsedResponse => console.log(parsedResponse));
 
-  fetch(`${BACKEND_URL}/calculators`)
-  .then(response => response.json())
-  .then(json => calculators(json));
+document.addEventListener("DOMContentLoaded", () => {
+        
+        const dropDown = document.getElementById('calc')
+        dropDown.addEventListener("change", function() {select(dropDown)});
+        fetchCalculators();
+        
+})
 
-  function calculators(json) {
-    const main = document.getElementById('test')
+function fetchCalculators() {
+    return fetch(`${BACKEND_URL}/calculators`)
+    .then(resp => resp.json())
+    .then(json => calculators(json)) 
+}
+
+function calculators(json) {
+    const main = document.getElementById('calc')
     json.forEach(calculator => {
-        const div = document.createElement('div');
-        div.innerHTML = `${calculator['name']}`;      
-        main.appendChild(div);
-      })
-  }
+        const opt = document.createElement('option');
+        opt.innerHTML = `${calculator['name']}`;      
+        main.appendChild(opt);
+    })
+}
+
+function select(dropDown) {
+    console.log(dropDown.value)
+}
