@@ -18,11 +18,20 @@ function calculators(json) {
     const main = document.getElementById('calc')
     json.forEach(calculator => {
         const opt = document.createElement('option');
-        opt.innerHTML = `${calculator['name']}`;      
+        opt.innerHTML = `${calculator['name']}`;
+        opt.id = `${calculator['id']}`      
         main.appendChild(opt);
     })
 }
 
+function calculator(json) {
+    const main = document.getElementById('current')
+    main.innerHTML = json["name"];
+}
+
 function select(dropDown) {
-    console.log(dropDown.value)
+    optionId = dropDown.options[dropDown.selectedIndex].id
+    return fetch(`${BACKEND_URL}/calculators/${optionId}`)
+    .then(resp => resp.json())
+    .then(json => calculator(json))
 }
