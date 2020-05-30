@@ -12,6 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
         f();
 })
 
-function toDollar(value) {
-    return `$${sprintf("%.2f", value)}`
+function toDollar(num) {
+    if (!!num.toString().split('.')[1])
+        return `$${num.toFixed(2)}`
+    else
+        return `$${num}`
 }

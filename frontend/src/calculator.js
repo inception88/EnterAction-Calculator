@@ -21,8 +21,8 @@ class Calculator {
         const table = document.getElementById('table');
         const individualGoal = table.rows[1].cells[5];
         const monthlyGoal = table.rows[2].cells[5];
-        individualGoal.innerHTML = json["individualGoal"]
-        monthlyGoal.innerHTML = json["monthlyGoal"]
+        individualGoal.innerHTML = toDollar(json["individualGoal"])
+        monthlyGoal.innerHTML = toDollar(json["monthlyGoal"])
     }
 
     static select(dropDown) {

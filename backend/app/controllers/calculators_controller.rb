@@ -7,7 +7,7 @@ class CalculatorsController < ApplicationController
     def show
         calculator = Calculator.find_by(id: params[:id])
         if calculator
-          render json: { id: calculator.id, name: calculator.name, individualGoal: to_d(calculator.individualGoal), monthlyGoal: to_d(calculator.monthlyGoal) }
+          render json: { id: calculator.id, name: calculator.name, individualGoal: calculator.individualGoal, monthlyGoal: calculator.monthlyGoal }
         else
           render json: { name: 'Calculator not found' }
         end
