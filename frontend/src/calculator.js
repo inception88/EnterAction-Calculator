@@ -2,10 +2,10 @@ class Calculator {
     static allFetch() {
         return fetch(`${BACKEND_URL}/calculators`)
         .then(resp => resp.json())
-        .then(json => this.calculators(json)) 
+        .then(json => this.all(json)) 
     }
 
-    static calculators(json) {
+    static all(json) {
         const main = document.getElementById('calc')
         json.forEach(calculator => {
             const opt = document.createElement('option');
