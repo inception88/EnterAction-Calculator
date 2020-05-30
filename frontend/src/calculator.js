@@ -18,8 +18,11 @@ class Calculator {
     static current(json) {
         const h1 = document.getElementById('current')
         h1.innerHTML = json["name"];
-        const div = document.getElementById('info');
-        div.innerHTML = `Individual Goal: ${json["individualGoal"]}`+` Monthly Goal: ${json["monthlyGoal"]}`
+        const table = document.getElementById('table');
+        const individualGoal = table.rows[1].cells[5];
+        const monthlyGoal = table.rows[2].cells[5];
+        individualGoal.innerHTML = json["individualGoal"]
+        monthlyGoal.innerHTML = json["monthlyGoal"]
     }
 
     static select(dropDown) {

@@ -11,3 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         f();
 })
+
+function toDollar(value) {
+    return `$${sprintf("%.2f", value)}`
+}
