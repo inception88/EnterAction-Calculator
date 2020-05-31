@@ -33,9 +33,23 @@ class Calculator {
         }
     }
 
+    static updateDropDown(json) {
+        const selector = Array.from(document.getElementById('calc'));
+        const opt = selector.find(option => { 
+            return option.id == json['attributes']['id']
+        })
+        opt.innerHTML = json["attributes"]['name'];
+    }
+
     static current(json) {
         const h1 = document.getElementById('current')
         h1.innerHTML = json['attributes']["name"];
+        const name = document.getElementById('update-calc-name')
+        name.value = json['attributes']["name"]
+        const iG = document.getElementById('individualGoal')
+        iG.value = json['attributes']["individualGoal"]
+        const mG = document.getElementById('monthlyGoal')
+        mG.value = json['attributes']["monthlyGoal"]
         const table = document.getElementById('table');
         const individualGoal = table.rows[1].cells[5];
         const monthlyGoal = table.rows[2].cells[5];
@@ -70,6 +84,35 @@ class Calculator {
             })
             .then(function(json) {
                 Calculator.addCalc(json["data"]);
+            })
+            .catch(function(error) {
+            console.log(error);
+            });
+    }
+
+    static updateCalc(calc, id) {
+        let formData = {
+            name: `${calc.elements[0].value}`,
+            individualGoal: `${calc.elements[1].value}`,
+            monthlyGoal: `${calc.elements[2].value}`
+            };
+            
+            let configObj = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(formData)
+            };
+            
+        fetch(`${BACKEND_URL}/calculators/${id}`, configObj)
+            .then(function(response) {
+            return response.json();
+            })
+            .then(function(json) {
+                Calculator.current(json["data"]);
+                Calculator.updateDropDown(json["data"]);
             })
             .catch(function(error) {
             console.log(error);

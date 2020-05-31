@@ -17,4 +17,10 @@ class CalculatorsController < ApplicationController
         calculator = Calculator.create(name: params[:name])
         render json: CalculatorSerializer.new(calculator)
     end
+
+    def update
+        calculator = Calculator.find(params[:id])
+        calculator.update(name: params[:name], monthlyGoal: params[:monthlyGoal], individualGoal: params[:individualGoal])
+        render json: CalculatorSerializer.new(calculator)
+    end
 end

@@ -9,6 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         Calculator.newCalc(newCalc);
     });
+    const updateCalc = document.getElementById("update-calc") 
+    updateCalc.addEventListener("submit", function(e) {
+        e.preventDefault();
+        Calculator.updateCalc(updateCalc, dropDown.options[dropDown.selectedIndex].id);
+    });
 
     async function f() {
         await Calculator.allFetch();
