@@ -14,6 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         Calculator.updateCalc(updateCalc, dropDown.options[dropDown.selectedIndex].id);
     });
+    const deleteCalc = document.getElementById("delete-calc") 
+    deleteCalc.addEventListener("click", function() {
+        Calculator.deleteCalc(dropDown.options[dropDown.selectedIndex].id);
+    });
 
     async function f() {
         await Calculator.allFetch();

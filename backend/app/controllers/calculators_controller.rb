@@ -23,4 +23,10 @@ class CalculatorsController < ApplicationController
         calculator.update(name: params[:name], monthlyGoal: params[:monthlyGoal], individualGoal: params[:individualGoal])
         render json: CalculatorSerializer.new(calculator)
     end
+
+    def destroy
+        calculator = Calculator.find(params[:id])
+        calculator.destroy
+        render json: {id: params[:id]}
+    end
 end

@@ -22,8 +22,9 @@ class Calculator {
             const main = document.getElementById('calc')
             const opt = document.createElement('option');
             opt.innerHTML = `${json["attributes"]['name']}`;
-            opt.id = `${json['attributes']['id']}`      
+            opt.id = `${json['attributes']['id']}`
             main.appendChild(opt);
+            main.options.selectedIndex = opt.index                
             this.current(json)
         }
         else {
@@ -39,6 +40,16 @@ class Calculator {
             return option.id == json['attributes']['id']
         })
         opt.innerHTML = json["attributes"]['name'];
+    }
+
+    static deleteDropDown(json) {
+        const selector = (document.getElementById('calc'));
+        const opt = Array.from(selector).find(option => { 
+            return option.id == json['id']
+        })
+        alert(`${opt.innerHTML} Has Been Deleted`)
+        opt.remove()
+        this.select(selector)
     }
 
     static current(json) {
@@ -113,6 +124,32 @@ class Calculator {
             .then(function(json) {
                 Calculator.current(json["data"]);
                 Calculator.updateDropDown(json["data"]);
+            })
+            .catch(function(error) {
+            console.log(error);
+            });
+    }
+
+    static deleteCalc(id) {
+        let formData = {
+            id: `${id}`
+            };
+            
+            let configObj = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(formData)
+            };
+            
+        fetch(`${BACKEND_URL}/calculators/${id}`, configObj)
+            .then(function(response) {
+            return response.json();
+            })
+            .then(function(json) {
+                Calculator.deleteDropDown(json);
             })
             .catch(function(error) {
             console.log(error);

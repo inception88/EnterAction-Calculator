@@ -10,3 +10,8 @@ table, th, td {
 .error {
     border-color: red;
 }
+
+#delete-calc {
+    margin: 0 auto;
+    display: block;
+}
