@@ -4,7 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
         
         const dropDown = document.getElementById('calc')
         dropDown.addEventListener("change", function() {Calculator.select(dropDown)});
-        
+        const newCalc = document.getElementById("new-calc")
+        newCalc.addEventListener("click", function(e) {
+            e.preventDefault();
+            Calculator.newCalc(newCalc);
+        });
+
         async function f() {
             await Calculator.allFetch();
             Calculator.select(dropDown);
