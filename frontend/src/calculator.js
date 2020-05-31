@@ -19,6 +19,7 @@ class Calculator {
         if (json['attributes']['id']) {
             const nameInput = document.getElementById('calc-name')
             nameInput.classList.remove("error")
+            nameInput.value = ''
             const main = document.getElementById('calc')
             const opt = document.createElement('option');
             opt.innerHTML = `${json["attributes"]['name']}`;
