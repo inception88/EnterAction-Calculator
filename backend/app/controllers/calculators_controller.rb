@@ -1,7 +1,6 @@
 class CalculatorsController < ApplicationController
     def index
         calculators = Calculator.all
-        #render json: calculators, except: [:created_at, :updated_at]
         render json: CalculatorSerializer.new(calculators)
     end
 
@@ -16,6 +15,6 @@ class CalculatorsController < ApplicationController
 
     def create
         calculator = Calculator.create(name: params[:name])
-        render json: {well: "test"}
+        render json: CalculatorSerializer.new(calculator)
     end
 end

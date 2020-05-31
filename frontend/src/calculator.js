@@ -14,6 +14,13 @@ class Calculator {
             main.appendChild(opt);
         })
     }
+    static addCalc(json) {
+        const main = document.getElementById('calc')
+        const opt = document.createElement('option');
+        opt.innerHTML = `${json["attributes"]['name']}`;
+        opt.id = `${json['attributes']['id']}`      
+        main.appendChild(opt);
+    }
 
     static current(json) {
         const h1 = document.getElementById('current')
@@ -33,6 +40,29 @@ class Calculator {
     }
 
     static newCalc(calc) {
-        console.log(calc.elements[0].value)
+        let formData = {
+            name: `${calc.elements[0].value}`
+            };
+            
+            let configObj = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(formData)
+            };
+            
+        fetch(`${BACKEND_URL}/calculators`, configObj)
+            .then(function(response) {
+            return response.json();
+            })
+            .then(function(json) {
+                Calculator.addCalc(json["data"]);
+                Calculator.current(json["data"]);
+            })
+            .catch(function(error) {
+            console.log(error.message);
+            });
     }
 }
