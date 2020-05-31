@@ -14,12 +14,24 @@ class Calculator {
             main.appendChild(opt);
         })
     }
+
     static addCalc(json) {
-        const main = document.getElementById('calc')
-        const opt = document.createElement('option');
-        opt.innerHTML = `${json["attributes"]['name']}`;
-        opt.id = `${json['attributes']['id']}`      
-        main.appendChild(opt);
+        if (json['attributes']['id']) {
+            const nameInput = document.getElementById('calc-name')
+            nameInput.classList.remove("error")
+            const main = document.getElementById('calc')
+            const opt = document.createElement('option');
+            opt.innerHTML = `${json["attributes"]['name']}`;
+            opt.id = `${json['attributes']['id']}`      
+            main.appendChild(opt);
+            this.current(json)
+        }
+        else {
+            const nameInput = document.getElementById('calc-name')
+
+            nameInput.value = "Name Required"
+            nameInput.className = 'error'
+        }
     }
 
     static current(json) {
@@ -58,11 +70,11 @@ class Calculator {
             return response.json();
             })
             .then(function(json) {
+                console.log(json)
                 Calculator.addCalc(json["data"]);
-                Calculator.current(json["data"]);
             })
             .catch(function(error) {
-            console.log(error.message);
+            console.log(error);
             });
     }
 }
