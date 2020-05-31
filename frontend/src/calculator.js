@@ -28,7 +28,6 @@ class Calculator {
         }
         else {
             const nameInput = document.getElementById('calc-name')
-
             nameInput.value = "Name Required"
             nameInput.className = 'error'
         }
@@ -70,7 +69,6 @@ class Calculator {
             return response.json();
             })
             .then(function(json) {
-                console.log(json)
                 Calculator.addCalc(json["data"]);
             })
             .catch(function(error) {
