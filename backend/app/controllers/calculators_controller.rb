@@ -13,4 +13,8 @@ class CalculatorsController < ApplicationController
         end
     end
 
+    def create
+        calculator = Calculator.create(name: params[:name])
+        render json: {well: "test"}
+    end
 end
