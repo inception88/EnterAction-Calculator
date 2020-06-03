@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  cost: 1.5
+  commission: 1.5
+  sales: 1
+  type: 
+  netPercentage: 1.5
+
+two:
+  name: MyString
+  cost: 1.5
+  commission: 1.5
+  sales: 1
+  type: 
+  netPercentage: 1.5
