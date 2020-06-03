@@ -28,8 +28,9 @@ ActiveRecord::Schema.define(version: 2020_06_03_001525) do
     t.float "cost"
     t.float "commission"
     t.integer "sales"
-    t.string "type"
+    t.string "frequency"
     t.float "netPercentage"
+    t.integer "calculator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

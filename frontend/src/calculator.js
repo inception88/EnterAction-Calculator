@@ -15,6 +15,32 @@ class Calculator {
         })
     }
 
+    static allProducts(json) {
+        const main = document.getElementById('products')
+        json.forEach(product => {
+            const li = document.createElement('li');
+            li.innerHTML = `${product["attributes"]['name']}`;
+            opt.id = `${product['attributes']['id']}`      
+            main.appendChild(opt);
+        })
+    }
+
+    static getProducts(id) {
+        return fetch(`${BACKEND_URL}/calculators/${id}/products`)
+        .then(resp => resp.json())
+        .then(json => console.log(json))
+    }
+
+    static all(json) {
+        const main = document.getElementById('calc')
+        json.forEach(calculator => {
+            const opt = document.createElement('option');
+            opt.innerHTML = `${calculator["attributes"]['name']}`;
+            opt.id = `${calculator['attributes']['id']}`      
+            main.appendChild(opt);
+        })
+    }
+
     static addCalc(json) {
         if (json['attributes']['id']) {
             const nameInput = document.getElementById('calc-name')
@@ -67,6 +93,7 @@ class Calculator {
         const monthlyGoal = table.rows[2].cells[5];
         individualGoal.innerHTML = toDollar(json['attributes']["individualGoal"])
         monthlyGoal.innerHTML = toDollar(json['attributes']["monthlyGoal"])
+        this.getProducts(json['attributes']["id"])
     }
 
     static select(dropDown) {
