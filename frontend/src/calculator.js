@@ -20,15 +20,15 @@ class Calculator {
         json.forEach(product => {
             const li = document.createElement('li');
             li.innerHTML = `${product["attributes"]['name']}`;
-            opt.id = `${product['attributes']['id']}`      
-            main.appendChild(opt);
+            li.id = `${product['attributes']['id']}`      
+            main.appendChild(li);
         })
     }
 
     static getProducts(id) {
         return fetch(`${BACKEND_URL}/calculators/${id}/products`)
         .then(resp => resp.json())
-        .then(json => console.log(json))
+        .then(json => this.allProducts(json["data"]))
     }
 
     static all(json) {
