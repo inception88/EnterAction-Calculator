@@ -12,8 +12,20 @@ class ProductsController < ApplicationController
         if product.save
             render json: ProductSerializer.new(product) 
         else
-            render json: {error: product.errors}
+            render json: {data: {error: product.errors}}
         end
+    end
+
+    def update
+        product = Product.find(params[:id])
+        product.update(product_params)
+        render json: ProductSerializer.new(product)
+    end
+
+    def destroy
+        product = Product.find(params[:id])
+        product.destroy
+        render json: {id: params[:id]}
     end
 
     private

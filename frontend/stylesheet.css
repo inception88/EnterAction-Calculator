@@ -2,9 +2,15 @@ h1 {
     text-align: center;
 }
 
-table, th, td {
+table, th {
     border: 1px solid black;
     text-align: center;
+}
+
+td {
+    border: 1px solid black;
+    text-align: center;
+    width: 12%;
 }
 
 .error {
@@ -14,4 +20,9 @@ table, th, td {
 #delete-calc {
     margin: 0 auto;
     display: block;
+}
+
+.product-input {
+    width: 95%;
+    text-align: center;
 }

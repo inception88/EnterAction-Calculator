@@ -16,23 +16,28 @@ class Product {
     static addProduct(json) {
 
         if (!("error" in json)) {
-            this.removeClass("product-name")
-            this.removeClass("cost")
-            this.removeClass("commission")
-            this.removeClass("netPercentage")
-            const product = json['data']
-            const table = document.getElementById('products')
-            const tr = document.createElement('tr');
-            tr.id = `${product['attributes']['id']}`
-            this.addRowData(tr, product, 'name')
-            this.addRowData(tr, product, 'sales')
-            this.addRowData(tr, product, 'cost')
-            this.addRowData(tr, product, 'commission')
-            this.addRowData(tr, product, 'frequency')
-            this.addRowData(tr, product, 'netPercentage')
-            this.addRowData(tr, product, 'profit')
-            this.addRowData(tr, product, 'price')
-            table.appendChild(tr);
+                this.removeClass("product-name")
+                this.removeClass("cost")
+                this.removeClass("commission")
+                this.removeClass("netPercentage")
+                const product = json
+                const table = document.getElementById('products')
+                const tr = document.createElement('tr');
+                tr.id = `${product['attributes']['id']}`
+                this.addRowData(tr, product, 'name')
+                this.addRowData(tr, product, 'sales')
+                this.addRowData(tr, product, 'cost')
+                this.addRowData(tr, product, 'commission')
+                this.addRowData(tr, product, 'frequency')
+                this.addRowData(tr, product, 'netPercentage')
+                this.addRowData(tr, product, 'profit')
+                this.addRowData(tr, product, 'price')
+                const button = document.createElement('button');
+                button.innerText = "Update"
+                button.id = `${product['attributes']['id']}`
+                tr.appendChild(button);
+                table.appendChild(tr);
+
         }
         else {
             let array = [];
@@ -53,21 +58,24 @@ class Product {
 
     static addRowData(tr, product, attribute) {
         const td = document.createElement('td');
+        const input = document.createElement('input');
         if (attribute == 'cost') {
-            td.innerHTML = toDollar(`${product["attributes"][`${attribute}`]}`)
+            input.value = toDollar(`${product["attributes"][`${attribute}`]}`)
         }
         else if (attribute == 'commission' || attribute == 'netPercentage') {
-            td.innerHTML = toPercent(`${product["attributes"][`${attribute}`]}`);
+            input.value = toPercent(`${product["attributes"][`${attribute}`]}`);
         }
         else if (attribute == 'price') {
-            td.innerHTML = toDollar(this.price(product));
+            input.value = toDollar(this.price(product));
         }
         else if (attribute == 'profit') {
-            td.innerHTML = toDollar(this.profit(product));
+            input.value = toDollar(this.profit(product));
         }
         else {
-            td.innerHTML = `${product["attributes"][`${attribute}`]}`;
-        }      
+            input.value = `${product["attributes"][`${attribute}`]}`;
+        }
+        input.className = "product-input"
+        td.appendChild(input)
         tr.appendChild(td);
     }
 
@@ -107,10 +115,48 @@ class Product {
             return response.json();
             })
             .then(function(json) {
-                Product.addProduct(json);
+                Product.addProduct(json['data']);
             })
             .catch(function(error) {
             console.log(error);
             });
     }
+
+    static updateProduct(prod, id) {
+        let formData = {
+            name: `${prod.elements[0].value}`,
+            sales: `${prod.elements[1].value}`,
+            cost: `${prod.elements[2].value}`,
+            commission: `${prod.elements[3].value}`,
+            netPercentage: `${prod.elements[4].value}`,
+            frequency: prod.elements[5].value,
+            calculator_id: `${prod.elements[6].value}`
+            };
+            
+            let configObj = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(formData)
+            };
+            
+        fetch(`${BACKEND_URL}/products/${id}`, configObj)
+            .then(function(response) {
+            return response.json();
+            })
+            .then(function(json) {
+                Calculator.current(json["data"]);
+                Calculator.updateDropDown(json["data"]);
+            })
+            .catch(function(error) {
+            console.log(error);
+            });
+    }
+
+//    newProduct.addEventListener("submit", function(e) {
+//        e.preventDefault();
+//        Product.newProduct(newProduct);
+//    });
 }

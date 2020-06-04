@@ -22,17 +22,7 @@ class Calculator {
                 row.remove()
         })
         json.forEach(product => {
-            const tr = document.createElement('tr');
-            tr.id = `${product['attributes']['id']}`
-            Product.addRowData(tr, product, 'name')
-            Product.addRowData(tr, product, 'sales')
-            Product.addRowData(tr, product, 'cost')
-            Product.addRowData(tr, product, 'commission')
-            Product.addRowData(tr, product, 'frequency')
-            Product.addRowData(tr, product, 'netPercentage')
-            Product.addRowData(tr, product, 'profit')
-            Product.addRowData(tr, product, 'price')
-            table.appendChild(tr);
+            Product.addProduct(product)
         })
 
     }
