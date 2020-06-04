@@ -1,16 +1,4 @@
 class Product {
-    
-    static price(product) {
-        const cost = product['attributes']['cost']
-        const netPercentage = product['attributes']['netPercentage']
-        return cost/(1-netPercentage)
-    }
-
-    static profit(product) {
-        const cost = product['attributes']['cost']
-        //const netPercentage = product['attributes']['netPercentage']
-        return this.price(product)-cost
-    }
 
     static addProduct(json) {
             if (json['attributes']['id']) {

@@ -43,10 +43,12 @@ function toPercent(num) {
 function productPrice(product) {
     const cost = product['attributes']['cost']
     const netPercentage = product['attributes']['netPercentage']
-    return cost/(1-(netPercentage/100))
+    const com = product['attributes']['commission']
+    return cost/(1-(netPercentage/100)-(com/100))
 }
 
 function productProfit(product) {
     const cost = product['attributes']['cost']
-    return productPrice(product)-cost
+    const com = product['attributes']['commission']
+    return productPrice(product)-cost-((com/100)*productPrice(product))
 }
