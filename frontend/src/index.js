@@ -18,6 +18,11 @@ document.addEventListener("DOMContentLoaded", () => {
     deleteCalc.addEventListener("click", function() {
         Calculator.deleteCalc(dropDown.options[dropDown.selectedIndex].id);
     });
+    const newProduct = document.getElementById("new-product")
+    newProduct.addEventListener("submit", function(e) {
+        e.preventDefault();
+        Product.newProduct(newProduct);
+    });
 
     async function f() {
         await Calculator.allFetch();
@@ -38,17 +43,4 @@ function toPercent(num) {
         return `${num.toFixed(2)}%`
     else
         return `${num}%`
-}
-
-function productPrice(product) {
-    const cost = product['attributes']['cost']
-    const netPercentage = product['attributes']['netPercentage']
-    const com = product['attributes']['commission']
-    return cost/(1-(netPercentage/100)-(com/100))
-}
-
-function productProfit(product) {
-    const cost = product['attributes']['cost']
-    const com = product['attributes']['commission']
-    return productPrice(product)-cost-((com/100)*productPrice(product))
 }

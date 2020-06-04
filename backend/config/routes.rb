@@ -3,5 +3,4 @@ Rails.application.routes.draw do
   resources :calculators do
     resources :products
   end
-  get '/test', to: 'application#test'
 end

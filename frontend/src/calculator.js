@@ -24,37 +24,17 @@ class Calculator {
         json.forEach(product => {
             const tr = document.createElement('tr');
             tr.id = `${product['attributes']['id']}`
-            this.addRowData(tr, product, 'name')
-            this.addRowData(tr, product, 'sales')
-            this.addRowData(tr, product, 'cost')
-            this.addRowData(tr, product, 'commission')
-            this.addRowData(tr, product, 'frequency')
-            this.addRowData(tr, product, 'netPercentage')
-            this.addRowData(tr, product, 'profit')
-            this.addRowData(tr, product, 'price')
+            Product.addRowData(tr, product, 'name')
+            Product.addRowData(tr, product, 'sales')
+            Product.addRowData(tr, product, 'cost')
+            Product.addRowData(tr, product, 'commission')
+            Product.addRowData(tr, product, 'frequency')
+            Product.addRowData(tr, product, 'netPercentage')
+            Product.addRowData(tr, product, 'profit')
+            Product.addRowData(tr, product, 'price')
             table.appendChild(tr);
         })
 
-    }
-
-    static addRowData(tr, product, attribute) {
-        const td = document.createElement('td');
-        if (attribute == 'cost') {
-            td.innerHTML = toDollar(`${product["attributes"][`${attribute}`]}`)
-        }
-        else if (attribute == 'commission' || attribute == 'netPercentage') {
-            td.innerHTML = toPercent(`${product["attributes"][`${attribute}`]}`);
-        }
-        else if (attribute == 'price') {
-            td.innerHTML = toDollar(productPrice(product));
-        }
-        else if (attribute == 'profit') {
-            td.innerHTML = toDollar(productProfit(product));
-        }
-        else {
-            td.innerHTML = `${product["attributes"][`${attribute}`]}`;
-        }      
-        tr.appendChild(td);
     }
 
     static getProducts(id) {
@@ -126,6 +106,8 @@ class Calculator {
         individualGoal.innerHTML = toDollar(json['attributes']["individualGoal"])
         monthlyGoal.innerHTML = toDollar(json['attributes']["monthlyGoal"])
         this.getProducts(json['attributes']["id"])
+        const input = document.getElementById('calc_id')
+        input.value = json['attributes']["id"]
     }
 
     static select(dropDown) {

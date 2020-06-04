@@ -25,6 +25,24 @@
     <input type="submit" value="Update Calculator">
   </form><br>
   <h3>Products:</h3>
+  <form id="new-product" style="width:100%">
+    <label for="product-name">Product Name:</label>
+    <input id="product-name" type="text">
+    <label for="sales">Sales:</label>
+    <input id="sales" type="text" style="width:5%">
+    <label for="cost">Cost:</label>
+    <input id="cost" type="text" style="width:5%">
+    <label for="commission">Commssion:</label>
+    <input id="commission" type="text" style="width:5%">
+    <label for="netPercentage">Net Percentage:</label>
+    <input id="netPercentage" type="text" style="width:5%">
+    <label>Monthly:</label>
+    <input id="monthly" type="radio" name="frequency" value="monthly">
+    <label>Individual:</label>
+    <input id="individual" type="radio" name="frequency" value="individual">
+    <input id="calc_id" type="hidden">
+    <input type="submit" value="Create Product">
+  </form><br>
   <table id="products" style="width:100%">
     <tr>
       <th>Name</th>
@@ -91,5 +109,6 @@
       </tr>
   </table>  <script type="application/javascript" src="src/index.js" charset="UTF-8"></script>
   <script type="application/javascript" src="src/calculator.js" charset="UTF-8"></script>
-  </body>
+  <script type="application/javascript" src="src/product.js" charset="UTF-8"></script>  
+</body>
 </html>
