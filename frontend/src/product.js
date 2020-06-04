@@ -1,5 +1,41 @@
 class Product {
     
+    static price(product) {
+        const cost = product['attributes']['cost']
+        const netPercentage = product['attributes']['netPercentage']
+        return cost/(1-netPercentage)
+    }
+
+    static profit(product) {
+        const cost = product['attributes']['cost']
+        //const netPercentage = product['attributes']['netPercentage']
+        return this.price(product)-cost
+    }
+
+    static addProduct(json) {
+            if (json['attributes']['id']) {
+                const form = document.getElementById('')
+                nameInput.classList.remove("error")
+                nameInput.value = ''
+                const main = document.getElementById('calc')
+                const opt = document.createElement('option');
+                opt.innerHTML = `${json["attributes"]['name']}`;
+                opt.id = `${json['attributes']['id']}`
+                main.appendChild(opt);
+                main.options.selectedIndex = opt.index                
+                //this.addForm(json)
+            }
+            else {
+                const nameInput = document.getElementById('calc-name')
+                nameInput.value = "Name Required"
+                nameInput.className = 'error'
+            }
+        }
+
+    //static addForm() {
+
+    //}
+
     static newProduct(prod) {
         let formData = {
             name: `${calc.elements[0].value}`
@@ -19,7 +55,7 @@ class Product {
             return response.json();
             })
             .then(function(json) {
-                Calculator.addCalc(json["data"]);
+                this.addProduct(json["data"]);
             })
             .catch(function(error) {
             console.log(error);

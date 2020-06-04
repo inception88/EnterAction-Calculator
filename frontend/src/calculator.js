@@ -16,13 +16,45 @@ class Calculator {
     }
 
     static allProducts(json) {
-        const main = document.getElementById('products')
-        json.forEach(product => {
-            const li = document.createElement('li');
-            li.innerHTML = `${product["attributes"]['name']}`;
-            li.id = `${product['attributes']['id']}`      
-            main.appendChild(li);
+        const table = document.getElementById('products')
+        Array.from(table.rows).forEach( row => {
+            if (row.id)
+                row.remove()
         })
+        json.forEach(product => {
+            const tr = document.createElement('tr');
+            tr.id = `${product['attributes']['id']}`
+            this.addRowData(tr, product, 'name')
+            this.addRowData(tr, product, 'sales')
+            this.addRowData(tr, product, 'cost')
+            this.addRowData(tr, product, 'commission')
+            this.addRowData(tr, product, 'frequency')
+            this.addRowData(tr, product, 'netPercentage')
+            this.addRowData(tr, product, 'profit')
+            this.addRowData(tr, product, 'price')
+            table.appendChild(tr);
+        })
+
+    }
+
+    static addRowData(tr, product, attribute) {
+        const td = document.createElement('td');
+        if (attribute == 'cost') {
+            td.innerHTML = toDollar(`${product["attributes"][`${attribute}`]}`)
+        }
+        else if (attribute == 'commission' || attribute == 'netPercentage') {
+            td.innerHTML = toPercent(`${product["attributes"][`${attribute}`]}`);
+        }
+        else if (attribute == 'price') {
+            td.innerHTML = toDollar(productPrice(product));
+        }
+        else if (attribute == 'profit') {
+            td.innerHTML = toDollar(productProfit(product));
+        }
+        else {
+            td.innerHTML = `${product["attributes"][`${attribute}`]}`;
+        }      
+        tr.appendChild(td);
     }
 
     static getProducts(id) {

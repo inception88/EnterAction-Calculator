@@ -32,3 +32,21 @@ function toDollar(num) {
     else
         return `$${num}`
 }
+
+function toPercent(num) {
+    if (!!num.toString().split('.')[1])
+        return `${num.toFixed(2)}%`
+    else
+        return `${num}%`
+}
+
+function productPrice(product) {
+    const cost = product['attributes']['cost']
+    const netPercentage = product['attributes']['netPercentage']
+    return cost/(1-(netPercentage/100))
+}
+
+function productProfit(product) {
+    const cost = product['attributes']['cost']
+    return productPrice(product)-cost
+}
