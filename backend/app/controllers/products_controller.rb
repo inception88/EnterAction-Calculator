@@ -8,8 +8,12 @@ class ProductsController < ApplicationController
     end
 
     def create
-        product = Product.create(product_params)
-        render json: ProductSerializer.new(product)
+        product = Product.new(product_params)
+        if product.save
+            render json: ProductSerializer.new(product) 
+        else
+            render json: {error: product.errors}
+        end
     end
 
     private

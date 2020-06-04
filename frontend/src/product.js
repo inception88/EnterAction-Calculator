@@ -15,22 +15,39 @@ class Product {
 
     static addProduct(json) {
 
-        if (json['attributes']['id']) {
+        if (!("error" in json)) {
+            this.removeClass("product-name")
+            this.removeClass("cost")
+            this.removeClass("commission")
+            this.removeClass("netPercentage")
+            const product = json['data']
             const table = document.getElementById('products')
             const tr = document.createElement('tr');
-            tr.id = `${json['attributes']['id']}`
-            this.addRowData(tr, json, 'name')
-            this.addRowData(tr, json, 'sales')
-            this.addRowData(tr, json, 'cost')
-            this.addRowData(tr, json, 'commission')
-            this.addRowData(tr, json, 'frequency')
-            this.addRowData(tr, json, 'netPercentage')
-            this.addRowData(tr, json, 'profit')
-            this.addRowData(tr, json, 'price')
+            tr.id = `${product['attributes']['id']}`
+            this.addRowData(tr, product, 'name')
+            this.addRowData(tr, product, 'sales')
+            this.addRowData(tr, product, 'cost')
+            this.addRowData(tr, product, 'commission')
+            this.addRowData(tr, product, 'frequency')
+            this.addRowData(tr, product, 'netPercentage')
+            this.addRowData(tr, product, 'profit')
+            this.addRowData(tr, product, 'price')
             table.appendChild(tr);
         }
         else {
-            alert("Product not added")
+            let array = [];
+            for (let [key, value] of Object.entries(json['error'])) {
+                array.push(`${key} ${value}`);
+                if (key == 'name') {
+                    const input = document.getElementById('product-name')
+                    input.className = 'error'
+                }
+                else {
+                    const input = document.getElementById(key)
+                    input.className = 'error'
+                }
+            }
+            alert((array))
         }
     }
 
@@ -53,9 +70,10 @@ class Product {
         }      
         tr.appendChild(td);
     }
-    //static addForm() {
 
-    //}
+    static removeClass(id) {
+        document.getElementById(id).classList.remove("error");
+    }
 
     static newProduct(prod) {
 
@@ -89,7 +107,7 @@ class Product {
             return response.json();
             })
             .then(function(json) {
-                Product.addProduct(json["data"]);
+                Product.addProduct(json);
             })
             .catch(function(error) {
             console.log(error);
