@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  cost: 1.5
+  frequency: MyString
+  quantity: 1
+  calculator_id: 1
+
+two:
+  name: MyString
+  cost: 1.5
+  frequency: MyString
+  quantity: 1
+  calculator_id: 1

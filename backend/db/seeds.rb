@@ -8,5 +8,7 @@
 
 #Calculator.create(name: "Test")
 #Calculator.create(name: "Test2")
-Product.create(name: "U'SPINN T-shirt", cost: 15, frequency: "monthly")
-Product.create(name: "Thick-fil-a Crop", cost: 10, frequency: "individual")
+#Product.create(name: "U'SPINN T-shirt", cost: 15, frequency: "monthly")
+#Product.create(name: "Thick-fil-a Crop", cost: 10, frequency: "individual")
+Expense.create(name: "software", cost: 10, frequency: "monthly", calculator_id: 44)
+Expense.create(name: "hardware", cost: 100, frequency: "individual", calculator_id: 44)

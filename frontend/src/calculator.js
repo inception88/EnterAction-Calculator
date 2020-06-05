@@ -14,6 +14,17 @@ class Calculator {
             main.appendChild(opt);
         })
     }
+    static allExpenses(json) {
+        const table = document.getElementById('expenses')
+        Array.from(table.rows).forEach( row => {
+            if (row.id)
+                row.remove()
+        })
+        json.forEach(expense => {
+            Expense.addExpense(expense)
+        })
+
+    }
 
     static allProducts(json) {
         const table = document.getElementById('products')
@@ -25,6 +36,12 @@ class Calculator {
             Product.addProduct(product)
         })
 
+    }
+
+    static getExpenses(id) {
+        return fetch(`${BACKEND_URL}/calculators/${id}/expenses`)
+        .then(resp => resp.json())
+        .then(json => this.allExpenses(json["data"]))
     }
 
     static getProducts(id) {
@@ -96,8 +113,11 @@ class Calculator {
         individualGoal.innerHTML = toDollar(json['attributes']["individualGoal"])
         monthlyGoal.innerHTML = toDollar(json['attributes']["monthlyGoal"])
         this.getProducts(json['attributes']["id"])
+        this.getExpenses(json['attributes']["id"])
         const input = document.getElementById('calc_id')
+        const input2 = document.getElementById('calc_id2')
         input.value = json['attributes']["id"]
+        input2.value = json['attributes']["id"]
     }
 
     static select(dropDown) {

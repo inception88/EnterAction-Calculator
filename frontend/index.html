@@ -56,6 +56,30 @@
     </tr>
   </table>
   <br>
+  <h3>Expenses:</h3>
+  <form id="new-expense" style="width:100%">
+    <label for="expense-name">Expense Name:</label>
+    <input id="expense-name" type="text">
+    <label for="quantity">Quantity:</label>
+    <input id="quantity" type="text" style="width:5%">
+    <label for="cost">Cost:</label>
+    <input id="cost" type="text" style="width:5%">
+    <label>Monthly:</label>
+    <input id="exp-monthly" type="radio" name="frequency" value="monthly">
+    <label>Individual:</label>
+    <input id="exp-individual" type="radio" name="frequency" value="individual">
+    <input id="calc_id2" type="hidden">
+    <input type="submit" value="Create Expense">
+  </form><br>
+  <table id="expenses" style="width:100%; border:none">
+    <tr>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Cost</th>
+      <th>Frequency</th>
+    </tr>
+  </table>
+  <br>
   <table id="table" style="width:100%">
     <tr>
       <th></th>
@@ -109,6 +133,7 @@
       </tr>
   </table>  <script type="application/javascript" src="src/index.js" charset="UTF-8"></script>
   <script type="application/javascript" src="src/calculator.js" charset="UTF-8"></script>
-  <script type="application/javascript" src="src/product.js" charset="UTF-8"></script>  
+  <script type="application/javascript" src="src/product.js" charset="UTF-8"></script>
+  <script type="application/javascript" src="src/expense.js" charset="UTF-8"></script>    
 </body>
 </html>
