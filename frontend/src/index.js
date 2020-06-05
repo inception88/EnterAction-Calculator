@@ -50,6 +50,7 @@ function toNumber(string) {
         const newString = string.substr(1)
         return parseFloat(newString)
     }
-    else
+    else {
         return parseFloat(string)
+    }
 }

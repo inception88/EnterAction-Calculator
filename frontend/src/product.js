@@ -58,12 +58,20 @@ class Product {
                 const button = document.createElement('button');
                 button.innerText = "Update"
                 button.id = `${product['attributes']['id']}`
+                button.className = "vertical-center"
                 button.addEventListener("click", function() {
-                            Product.updateProduct(tr);
+                    Product.updateProduct(tr);
+                });
+                const button2 = document.createElement('button');
+                button2.innerText = "Delete"
+                button2.id = `${product['attributes']['id']}`
+                button2.className = "vertical-center"
+                button2.addEventListener("click", function() {
+                            Product.deleteProduct(product['attributes']['id']);
                         });
                 tr.appendChild(button);
+                tr.appendChild(button2);
                 table.appendChild(tr);
-
         }
         else {
             let array = [];
@@ -86,12 +94,12 @@ class Product {
         const td = document.createElement('td');
         const input = document.createElement('input');
         if (attribute == 'cost') {
-            input.value = toDollar(`${product["attributes"][`${attribute}`]}`)
+            input.value = toDollar(product["attributes"][attribute])
             input.className = "product-input"
             td.appendChild(input)
         }
         else if (attribute == 'commission' || attribute == 'netPercentage') {
-            input.value = toPercent(`${product["attributes"][`${attribute}`]}`);
+            input.value = toPercent(product["attributes"][attribute]);
             input.className = "product-input"
             td.appendChild(input)
         }
@@ -111,6 +119,13 @@ class Product {
 
     static removeClass(id) {
         document.getElementById(id).classList.remove("error");
+    }
+
+    static delete(prod) {
+        const table = document.getElementById("products")
+        const row = table.rows.namedItem(prod['id'])
+        alert(`${row.cells[0].firstElementChild.value} Has Been Deleted`)
+        row.remove()
     }
 
     static newProduct(prod) {
@@ -170,13 +185,38 @@ class Product {
             },
             body: JSON.stringify(formData)
             };
-         console.log(formData)   
         fetch(`${BACKEND_URL}/products/${prod.id}`, configObj)
             .then(function(response) {
             return response.json();
             })
             .then(function(json) {
                 Product.update(json["data"]);
+            })
+            .catch(function(error) {
+            console.log(error);
+            });
+    }
+
+    static deleteProduct(id) {
+        let formData = {
+            id: id
+            };
+            
+            let configObj = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(formData)
+            };
+            
+        fetch(`${BACKEND_URL}/products/${id}`, configObj)
+            .then(function(response) {
+            return response.json();
+            })
+            .then(function(json) {
+                Product.delete(json);
             })
             .catch(function(error) {
             console.log(error);
