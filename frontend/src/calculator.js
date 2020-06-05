@@ -23,7 +23,6 @@ class Calculator {
         json.forEach(expense => {
             Expense.addExpense(expense)
         })
-
     }
 
     static allProducts(json) {
@@ -35,7 +34,7 @@ class Calculator {
         json.forEach(product => {
             Product.addProduct(product)
         })
-
+        Total.updateTotals(json)
     }
 
     static getExpenses(id) {
@@ -107,7 +106,7 @@ class Calculator {
         iG.value = json['attributes']["individualGoal"]
         const mG = document.getElementById('monthlyGoal')
         mG.value = json['attributes']["monthlyGoal"]
-        const table = document.getElementById('table');
+        const table = document.getElementById('totals');
         const individualGoal = table.rows[1].cells[5];
         const monthlyGoal = table.rows[2].cells[5];
         individualGoal.innerHTML = toDollar(json['attributes']["individualGoal"])
