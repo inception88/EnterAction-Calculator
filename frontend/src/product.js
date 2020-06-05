@@ -13,6 +13,31 @@ class Product {
         return this.price(product)-cost-((com/100)*this.price(product))
     }
 
+    static update(prod) {
+
+        if (!("error" in prod)) {
+            const table = document.getElementById("products")
+            const row = table.rows.namedItem(prod['id'])
+            console.log(row)
+            console.log(prod)
+            row.cells[0].firstElementChild.value = prod['attributes']["name"]
+            row.cells[1].firstElementChild.value = prod['attributes']["sales"]
+            row.cells[2].firstElementChild.value = toDollar(prod['attributes']["cost"])
+            row.cells[3].firstElementChild.value = toPercent(prod['attributes']["commission"])
+            row.cells[4].firstElementChild.value = prod['attributes']["frequency"]
+            row.cells[5].firstElementChild.value = toPercent(prod['attributes']["netPercentage"])
+            row.cells[6].firstElementChild.value = toDollar(this.profit(prod))
+            row.cells[7].firstElementChild.value = toDollar(this.price(prod))
+        }
+        else {
+            let array = [];
+            for (let [key, value] of Object.entries(prod['error'])) {
+                array.push(`${key} ${value}`);
+            }
+            alert((array))
+        }
+    }
+
     static addProduct(json) {
 
         if (!("error" in json)) {
@@ -35,6 +60,9 @@ class Product {
                 const button = document.createElement('button');
                 button.innerText = "Update"
                 button.id = `${product['attributes']['id']}`
+                button.addEventListener("click", function() {
+                            Product.updateProduct(tr);
+                        });
                 tr.appendChild(button);
                 table.appendChild(tr);
 
@@ -122,15 +150,14 @@ class Product {
             });
     }
 
-    static updateProduct(prod, id) {
+    static updateProduct(prod) {
         let formData = {
-            name: `${prod.elements[0].value}`,
-            sales: `${prod.elements[1].value}`,
-            cost: `${prod.elements[2].value}`,
-            commission: `${prod.elements[3].value}`,
-            netPercentage: `${prod.elements[4].value}`,
-            frequency: prod.elements[5].value,
-            calculator_id: `${prod.elements[6].value}`
+            name: prod.cells[0].firstElementChild.value,
+            sales: prod.cells[1].firstElementChild.value,
+            cost: toNumber(prod.cells[2].firstElementChild.value),
+            commission: toNumber(prod.cells[3].firstElementChild.value),
+            frequency: prod.cells[4].firstElementChild.value,
+            netPercentage: toNumber(prod.cells[5].firstElementChild.value)
             };
             
             let configObj = {
@@ -141,22 +168,16 @@ class Product {
             },
             body: JSON.stringify(formData)
             };
-            
-        fetch(`${BACKEND_URL}/products/${id}`, configObj)
+         console.log(formData)   
+        fetch(`${BACKEND_URL}/products/${prod.id}`, configObj)
             .then(function(response) {
             return response.json();
             })
             .then(function(json) {
-                Calculator.current(json["data"]);
-                Calculator.updateDropDown(json["data"]);
+                Product.update(json["data"]);
             })
             .catch(function(error) {
             console.log(error);
             });
     }
-
-//    newProduct.addEventListener("submit", function(e) {
-//        e.preventDefault();
-//        Product.newProduct(newProduct);
-//    });
 }

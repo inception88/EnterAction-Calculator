@@ -44,3 +44,12 @@ function toPercent(num) {
     else
         return `${num}%`
 }
+
+function toNumber(string) {
+    if (string.charAt(0) == '$') {
+        const newString = string.substr(1)
+        return parseFloat(newString)
+    }
+    else
+        return parseFloat(string)
+}

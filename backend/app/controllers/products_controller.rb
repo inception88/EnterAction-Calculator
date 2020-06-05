@@ -18,8 +18,11 @@ class ProductsController < ApplicationController
 
     def update
         product = Product.find(params[:id])
-        product.update(product_params)
-        render json: ProductSerializer.new(product)
+        if product.update(product_params)
+            render json: ProductSerializer.new(product)
+        else
+            render json: {data: {error: product.errors}}
+        end
     end
 
     def destroy
