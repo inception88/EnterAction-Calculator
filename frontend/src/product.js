@@ -18,16 +18,14 @@ class Product {
         if (!("error" in prod)) {
             const table = document.getElementById("products")
             const row = table.rows.namedItem(prod['id'])
-            console.log(row)
-            console.log(prod)
             row.cells[0].firstElementChild.value = prod['attributes']["name"]
             row.cells[1].firstElementChild.value = prod['attributes']["sales"]
             row.cells[2].firstElementChild.value = toDollar(prod['attributes']["cost"])
             row.cells[3].firstElementChild.value = toPercent(prod['attributes']["commission"])
             row.cells[4].firstElementChild.value = prod['attributes']["frequency"]
             row.cells[5].firstElementChild.value = toPercent(prod['attributes']["netPercentage"])
-            row.cells[6].firstElementChild.value = toDollar(this.profit(prod))
-            row.cells[7].firstElementChild.value = toDollar(this.price(prod))
+            row.cells[6].innerHTML = toDollar(this.profit(prod))
+            row.cells[7].innerHTML = toDollar(this.price(prod))
         }
         else {
             let array = [];
@@ -89,21 +87,25 @@ class Product {
         const input = document.createElement('input');
         if (attribute == 'cost') {
             input.value = toDollar(`${product["attributes"][`${attribute}`]}`)
+            input.className = "product-input"
+            td.appendChild(input)
         }
         else if (attribute == 'commission' || attribute == 'netPercentage') {
             input.value = toPercent(`${product["attributes"][`${attribute}`]}`);
+            input.className = "product-input"
+            td.appendChild(input)
         }
         else if (attribute == 'price') {
-            input.value = toDollar(this.price(product));
+            td.innerText = toDollar(this.price(product));
         }
         else if (attribute == 'profit') {
-            input.value = toDollar(this.profit(product));
+            td.innerText = toDollar(this.profit(product));
         }
         else {
             input.value = `${product["attributes"][`${attribute}`]}`;
+            input.className = "product-input"
+            td.appendChild(input)
         }
-        input.className = "product-input"
-        td.appendChild(input)
         tr.appendChild(td);
     }
 
