@@ -23,6 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         Product.newProduct(newProduct);
     });
+    const newExpense = document.getElementById("new-expense")
+    newExpense.addEventListener("submit", function(e) {
+        e.preventDefault();
+        Expense.newExpense(newExpense);
+    });
 
     async function f() {
         await Calculator.allFetch();

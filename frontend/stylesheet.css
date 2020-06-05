@@ -22,7 +22,7 @@ td {
     display: block;
 }
 
-.product-input {
+.product-input, .expense-input {
     width: 95%;
     text-align: center;
 }
