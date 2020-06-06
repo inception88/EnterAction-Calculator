@@ -83,6 +83,6 @@ test:
 #
 production:
   <<: *default
-  database: EnterAction-Calculator-backend_production
-  username: EnterAction-Calculator-backend
-  password: <%= ENV['ENTERACTION-CALCULATOR-BACKEND_DATABASE_PASSWORD'] %>
+  database: postgresql-tapered-93375
+  username: veynxzjszzhgdf
+  password: 5fe09514dc09968e4b36e1e27e2cc5926467c33544c846f4f8703ba4c41b5155
