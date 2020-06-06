@@ -26,7 +26,9 @@ default: &default
 
 development:
   <<: *default
-    database: postgresql-tapered-93375
+  host: ec2-34-202-7-83.compute-1.amazonaws.com
+  database: postgresql-tapered-93375
+  port: 5432
   username: veynxzjszzhgdf
   password: 5fe09514dc09968e4b36e1e27e2cc5926467c33544c846f4f8703ba4c41b5155
 
@@ -85,6 +87,8 @@ test:
 #
 production:
   <<: *default
+  host: ec2-34-202-7-83.compute-1.amazonaws.com
   database: postgresql-tapered-93375
+  port: 5432
   username: veynxzjszzhgdf
   password: 5fe09514dc09968e4b36e1e27e2cc5926467c33544c846f4f8703ba4c41b5155
