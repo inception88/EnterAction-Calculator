@@ -26,7 +26,9 @@ default: &default
 
 development:
   <<: *default
-  database: EnterAction-Calculator-backend_development
+    database: postgresql-tapered-93375
+  username: veynxzjszzhgdf
+  password: 5fe09514dc09968e4b36e1e27e2cc5926467c33544c846f4f8703ba4c41b5155
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
