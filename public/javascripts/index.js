@@ -32,6 +32,10 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         Expense.newExpense(newExpense);
     });
+    const updateTotals = document.getElementById("totals-calc") 
+    updateTotals.addEventListener("click", function() {
+        Total.update(dropDown.options[dropDown.selectedIndex].id);
+    });
 
     async function f() {
         await Calculator.allFetch();

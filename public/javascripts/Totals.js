@@ -86,19 +86,14 @@ class Total {
             else
                 table.rows[i].cells[5].className = 'positive'
         }
-
     }
 
-    static delete(json) {
-
-    }
-
-    static update(json) {
-
-    }
-
-    static updateTotals(json) {
-        this.productTotals(json)
-        this.expenseTotals(json, )
+    static update(id) {
+        async function f(id) {
+            await Calculator.getProducts(id);
+            await Calculator.getExpenses(id);
+            Total.profit()
+        }
+        f(id);
     }
 }

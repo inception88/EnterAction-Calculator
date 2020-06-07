@@ -17,7 +17,7 @@ td {
     border-color: red;
 }
 
-#delete-calc {
+#delete-calc, #totals-calc {
     margin: 0 auto;
     display: block;
 }

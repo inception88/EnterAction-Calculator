@@ -72,7 +72,7 @@ class Product {
                 tr.appendChild(button);
                 tr.appendChild(button2);
                 table.appendChild(tr);
-        }
+            }
         else {
             let array = [];
             for (let [key, value] of Object.entries(json['error'])) {

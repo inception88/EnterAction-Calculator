@@ -2,7 +2,7 @@ class Calculator {
     static allFetch() {
         return fetch(`${BACKEND_URL}/calculators`)
         .then(resp => resp.json())
-        .then(json => this.all(json["data"])) 
+        .then(json => this.all(json["data"]))
     }
 
     static all(json) {
@@ -114,20 +114,11 @@ class Calculator {
         monthlyGoal.innerHTML = toDollar(json['attributes']["monthlyGoal"])
         table.rows[3].cells[5].innerHTML = toDollar(json['attributes']["monthlyGoal"]*12)
         table.rows[4].cells[5].innerHTML = toDollar((json['attributes']["monthlyGoal"]*12)+json['attributes']["individualGoal"])
-        
-        async function f(id) {
-            await Calculator.getProducts(id);
-            await Calculator.getExpenses(id);
-            Total.profit()
-        }
-        f(json['attributes']["id"]);
-
-        //this.getProducts(json['attributes']["id"])
-        //this.getExpenses(json['attributes']["id"])
         const input = document.getElementById('calc_id')
         const input2 = document.getElementById('calc_id2')
         input.value = json['attributes']["id"]
         input2.value = json['attributes']["id"]
+        Total.update(json['attributes']["id"])
     }
 
     static select(dropDown) {
