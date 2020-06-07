@@ -96,7 +96,7 @@ class Calculator {
         alert(`${opt.innerHTML} Has Been Deleted`)
         opt.remove()
         this.select(selector)
-    }
+    } 
 
     static current(json) {
         const h1 = document.getElementById('current')
@@ -114,8 +114,15 @@ class Calculator {
         monthlyGoal.innerHTML = toDollar(json['attributes']["monthlyGoal"])
         table.rows[3].cells[5].innerHTML = toDollar(json['attributes']["monthlyGoal"]*12)
         table.rows[4].cells[5].innerHTML = toDollar((json['attributes']["monthlyGoal"]*12)+json['attributes']["individualGoal"])
-        this.getProducts(json['attributes']["id"])
-        this.getExpenses(json['attributes']["id"])
+        
+        async function f(id) {
+            await Calculator.getProducts(id);
+            Calculator.getExpenses(id);
+        }
+        f(json['attributes']["id"]);
+
+        //this.getProducts(json['attributes']["id"])
+        //this.getExpenses(json['attributes']["id"])
         const input = document.getElementById('calc_id')
         const input2 = document.getElementById('calc_id2')
         input.value = json['attributes']["id"]
