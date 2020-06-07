@@ -13,12 +13,13 @@ class Total {
 
         prod.forEach(product => {
             if (product['attributes']['frequency'] == "individual") {
+                individualExpenses += product['attributes']['cost']*product['attributes']['sales']
                 individualSales += product['attributes']['sales']
                 individualCommission += (product['attributes']['sales'])*((product['attributes']['commission'])/100)*(Product.price(product))
                 individualRevenue += (product['attributes']['sales'])*(Product.price(product))
             }
             else {
-                console.log(Product.price(product))
+                monthlyExpenses += product['attributes']['cost']*product['attributes']['sales']
                 monthlySales += product['attributes']['sales']
                 monthlyCommission += (product['attributes']['sales'])*((product['attributes']['commission'])/100)*(Product.price(product))
                 monthlyRevenue += (product['attributes']['sales'])*(Product.price(product))
@@ -37,6 +38,8 @@ class Total {
         table.rows[2].cells[4].innerHTML = toDollar(monthlyRevenue)
         table.rows[3].cells[4].innerHTML = toDollar(monthlyRevenue*12) //annual revenue
         table.rows[4].cells[4].innerHTML = toDollar(individualRevenue+(monthlyRevenue*12)) //total revenue
+        individualProductExpenses = individualExpenses
+        monthlyProductExpenses = monthlyExpenses
     }
 
     static expenseTotals(exp) {
@@ -44,21 +47,18 @@ class Total {
         let individualExpenses = 0;
         exp.forEach(expense => {
             if (expense['attributes']['frequency'] == "individual") {
-                individualExpenses += expense['attributes']['cost']
+                individualExpenses += expense['attributes']['cost']*expense['attributes']['quantity']
             }
             else {
-                monthlyExpenses += expense['attributes']['cost']
+                monthlyExpenses += expense['attributes']['cost']*expense['attributes']['quantity']
             }
         })
         const table = document.getElementById('totals')
-        const iE = table.rows[1].cells[2];
-        const mE = table.rows[2].cells[2];
-        const aE = table.rows[3].cells[2];
-        const totalExpenses = table.rows[4].cells[2];
-        iE.innerHTML = individualExpenses
-        mE.innerHTML = monthlyExpenses
-        aE.innerHTML = monthlyExpenses*12
-        totalExpenses.innerHTML = individualExpenses + (monthlyExpenses*12)
+        table.rows[1].cells[2].innerHTML = toDollar(individualExpenses + individualProductExpenses) //individual expenses + individual product costs
+        table.rows[2].cells[2].innerHTML = toDollar(monthlyExpenses + monthlyProductExpenses) //monthly expenses + monthly product costs
+        table.rows[3].cells[2].innerHTML = toDollar(monthlyExpenses + monthlyProductExpenses) //annual expenses + annual product costs
+        //annual and individual expenses + annual and individual product costs
+        table.rows[4].cells[2].innerHTML = toDollar(individualExpenses + individualProductExpenses + ((monthlyExpenses+monthlyProductExpenses)*12))
     }
 
     static delete(json) {

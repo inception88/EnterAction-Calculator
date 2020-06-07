@@ -112,6 +112,8 @@ class Calculator {
         const monthlyGoal = table.rows[2].cells[5];
         individualGoal.innerHTML = toDollar(json['attributes']["individualGoal"])
         monthlyGoal.innerHTML = toDollar(json['attributes']["monthlyGoal"])
+        table.rows[3].cells[5].innerHTML = toDollar(json['attributes']["monthlyGoal"]*12)
+        table.rows[4].cells[5].innerHTML = toDollar((json['attributes']["monthlyGoal"]*12)+json['attributes']["individualGoal"])
         this.getProducts(json['attributes']["id"])
         this.getExpenses(json['attributes']["id"])
         const input = document.getElementById('calc_id')
