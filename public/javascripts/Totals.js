@@ -45,9 +45,4 @@ class Total {
         aE.innerHTML = monthlyExpenses*12
         totalExpenses.innerHTML = individualExpenses + (monthlyExpenses*12)
     }
-
-    static updateTotals(json) {
-        this.sales(json)
-        this.expenses(json)
-    }
 }
