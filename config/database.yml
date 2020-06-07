@@ -26,11 +26,7 @@ default: &default
 
 development:
   <<: *default
-  host: ec2-34-202-7-83.compute-1.amazonaws.com
-  database: postgresql-tapered-93375
-  port: 5432
-  username: veynxzjszzhgdf
-  password: 5fe09514dc09968e4b36e1e27e2cc5926467c33544c846f4f8703ba4c41b5155
+  database: EnterAction-Calculator-backend_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -78,17 +74,10 @@ test:
 # On Heroku and other platform providers, you may have a full connection URL
 # available as an environment variable. For example:
 #
-#   DATABASE_URL="postgres://myuser:mypass@localhost/somedatabase"
+DATABASE_URL="postgres://veynxzjszzhgdf:5fe09514dc09968e4b36e1e27e2cc5926467c33544c846f4f8703ba4c41b5155@ec2-34-202-7-83.compute-1.amazonaws.com:5432/d71h6e2h48ir21"
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-#
-production:
-  <<: *default
-  host: ec2-34-202-7-83.compute-1.amazonaws.com
-  database: postgresql-tapered-93375
-  port: 5432
-  username: veynxzjszzhgdf
-  password: 5fe09514dc09968e4b36e1e27e2cc5926467c33544c846f4f8703ba4c41b5155
+   production:
+     url: <%= ENV['DATABASE_URL'] %>
+
