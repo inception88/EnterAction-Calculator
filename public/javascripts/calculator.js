@@ -117,7 +117,8 @@ class Calculator {
         
         async function f(id) {
             await Calculator.getProducts(id);
-            Calculator.getExpenses(id);
+            await Calculator.getExpenses(id);
+            Total.profit()
         }
         f(json['attributes']["id"]);
 

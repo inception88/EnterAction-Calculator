@@ -56,9 +56,37 @@ class Total {
         const table = document.getElementById('totals')
         table.rows[1].cells[2].innerHTML = toDollar(individualExpenses + individualProductExpenses) //individual expenses + individual product costs
         table.rows[2].cells[2].innerHTML = toDollar(monthlyExpenses + monthlyProductExpenses) //monthly expenses + monthly product costs
-        table.rows[3].cells[2].innerHTML = toDollar(monthlyExpenses + monthlyProductExpenses) //annual expenses + annual product costs
+        table.rows[3].cells[2].innerHTML = toDollar((monthlyExpenses + monthlyProductExpenses)*12) //annual expenses + annual product costs
         //annual and individual expenses + annual and individual product costs
         table.rows[4].cells[2].innerHTML = toDollar(individualExpenses + individualProductExpenses + ((monthlyExpenses+monthlyProductExpenses)*12))
+    }
+
+    static profit() {
+
+        const table = document.getElementById('totals')
+
+        for (let i=1; i<5; i++) {
+
+            let revenue = toNumber(table.rows[i].cells[4].innerHTML)
+            let expenses = toNumber(table.rows[i].cells[2].innerHTML)
+            let commission = toNumber(table.rows[i].cells[3].innerHTML)
+            let goal = toNumber(table.rows[i].cells[5].innerHTML)
+            let profit = (revenue-expenses-commission)
+            let netProfitPercentage = toPercent((profit/revenue)*100)
+
+            table.rows[i].cells[6].innerHTML = toDollar(profit)
+            table.rows[i].cells[7].innerHTML = netProfitPercentage
+            if (profit < 0)
+                table.rows[i].cells[6].className = 'negative'
+            else
+                table.rows[i].cells[6].className = 'positive'
+
+            if (profit < goal)
+                table.rows[i].cells[5].className = 'negative'
+            else
+                table.rows[i].cells[5].className = 'positive'
+        }
+
     }
 
     static delete(json) {

@@ -30,3 +30,11 @@ td {
 .vertical-center {
     top: 50%;
   }
+
+.negative {
+    color: red;
+  }
+
+.positive {
+    color: green;
+}
