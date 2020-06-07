@@ -1,4 +1,5 @@
-const BACKEND_URL = 'http://localhost:3000';
+//const BACKEND_URL = 'http://localhost:3000';
+const BACKEND_URL = 'https://enteraction-calculator.herokuapp.com/';
 
 document.addEventListener("DOMContentLoaded", () => {
         
