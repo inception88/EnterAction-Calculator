@@ -23,7 +23,7 @@ class Calculator {
         json.forEach(expense => {
             Expense.addExpense(expense)
         })
-        Total.expenses(json)
+        Total.expenseTotals(json)
     }
 
     static allProducts(json) {
@@ -35,7 +35,7 @@ class Calculator {
         json.forEach(product => {
             Product.addProduct(product)
         })
-        Total.sales(json)
+        Total.productTotals(json)
     }
 
     static getExpenses(id) {

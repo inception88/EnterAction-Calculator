@@ -39,7 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function toDollar(num) {
     if (!!num.toString().split('.')[1])
-        return `$${num.toFixed(2)}`
+        if (num.toString().split('.')[1].substr(0,2) != '00')
+            return `$${num.toFixed(2)}`
+        else
+            return `$${num.toFixed()}`
     else
         return `$${num}`
 }

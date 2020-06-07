@@ -1,30 +1,45 @@
 class Total {
 
-    static sales(prod) {
-        console.log(prod)
-        let monthlySales = 0;
+
+    static productTotals(prod) {
         let individualSales = 0;
+        let monthlySales = 0;
+        let individualCommission = 0;
+        let monthlyCommission = 0;
+        let individualRevenue = 0;
+        let monthlyRevenue = 0;
+        let monthlyExpenses = 0;
+        let individualExpenses = 0;
+
         prod.forEach(product => {
             if (product['attributes']['frequency'] == "individual") {
                 individualSales += product['attributes']['sales']
+                individualCommission += (product['attributes']['sales'])*((product['attributes']['commission'])/100)*(Product.price(product))
+                individualRevenue += (product['attributes']['sales'])*(Product.price(product))
             }
             else {
+                console.log(Product.price(product))
                 monthlySales += product['attributes']['sales']
+                monthlyCommission += (product['attributes']['sales'])*((product['attributes']['commission'])/100)*(Product.price(product))
+                monthlyRevenue += (product['attributes']['sales'])*(Product.price(product))
             }
         })
         const table = document.getElementById('totals')
-        const iS = table.rows[1].cells[1];
-        const mS = table.rows[2].cells[1];
-        const aS = table.rows[3].cells[1];
-        const totalSales = table.rows[4].cells[1];
-        iS.innerHTML = individualSales
-        mS.innerHTML = monthlySales
-        aS.innerHTML = monthlySales*12
-        totalSales.innerHTML = individualSales + (monthlySales*12)
+        table.rows[1].cells[1].innerHTML = individualSales;
+        table.rows[2].cells[1].innerHTML = monthlySales
+        table.rows[3].cells[1].innerHTML = monthlySales*12 //annual sales
+        table.rows[4].cells[1].innerHTML = individualSales + (monthlySales*12) //total sales
+        table.rows[1].cells[3].innerHTML = toDollar(individualCommission)
+        table.rows[2].cells[3].innerHTML = toDollar(monthlyCommission)
+        table.rows[3].cells[3].innerHTML = toDollar(monthlyCommission*12) //annual commision
+        table.rows[4].cells[3].innerHTML = toDollar(individualCommission+(monthlyCommission*12)) //total commission
+        table.rows[1].cells[4].innerHTML = toDollar(individualRevenue)
+        table.rows[2].cells[4].innerHTML = toDollar(monthlyRevenue)
+        table.rows[3].cells[4].innerHTML = toDollar(monthlyRevenue*12) //annual revenue
+        table.rows[4].cells[4].innerHTML = toDollar(individualRevenue+(monthlyRevenue*12)) //total revenue
     }
 
-    static expenses(exp) {
-        console.log(exp)
+    static expenseTotals(exp) {
         let monthlyExpenses = 0;
         let individualExpenses = 0;
         exp.forEach(expense => {
@@ -46,8 +61,16 @@ class Total {
         totalExpenses.innerHTML = individualExpenses + (monthlyExpenses*12)
     }
 
+    static delete(json) {
+
+    }
+
+    static update(json) {
+
+    }
+
     static updateTotals(json) {
-        this.sales(json)
-        this.expenses(json)
+        this.productTotals(json)
+        this.expenseTotals(json, )
     }
 }
