@@ -7,7 +7,8 @@
   </head>
   <body>
     <h1>Profit and Pricing Strategy Calculator</h1>
-    <ul>Definitions:
+    <h2>Definitions:</h2>
+    <ul>
       <li>Sales - Number of sales for a product. This will be used to calculate totals.</li>
       <li>Product Cost - Cost to make a product. This will be subtracted from price to calculate profit. It will also be added to expenses in totals.</li>
       <li>Expense Cost - Cost for an expense. This is how much you need to pay for anything not associated with a sale. It will also be added to expenses in totals.</li>
@@ -17,8 +18,8 @@
       <li>Frequency - Recurring(monthly) or One-time(individual). This will determine whether something is used once or added multiple times in the totals.</li>
       <li>Quantity - Number of expenses. This will be used to calculate totals.</li>
     </ul><br>
-   <label for="calc">Choose Calculator:</label>
-    <select name="calculator" id="calc"></select><br><br>
+   <br><label for="calc">Choose Calculator:</label>
+    <select name="calculator" id="calc"></select><br>
   <form id="new-calc">
     <label for="new-calc">New Calculator Name:</label>
     <input id="calc-name" type="text">
@@ -29,9 +30,9 @@
   <form id="update-calc">
     <label for="update-calc-name">Name:</label>
     <input id="update-calc-name" type="text">
-    <label for="individualGoal">Individual Goal:</label>
+    <label for="individualGoal">Individual Goal: $</label>
     <input id="individualGoal" type="text">
-    <label for="monthlyGoal">Monthly Goal:</label>
+    <label for="monthlyGoal">Monthly Goal: $</label>
     <input id="monthlyGoal" type="text">
     <input type="submit" value="Update Calculator">
   </form><br>
@@ -41,12 +42,12 @@
     <input id="product-name" type="text">
     <label for="sales">Sales:</label>
     <input id="sales" type="text" style="width:5%">
-    <label for="cost">Cost:</label>
+    <label for="cost">Cost: $</label>
     <input id="cost" type="text" style="width:5%">
     <label for="commission">Commssion:</label>
-    <input id="commission" type="text" style="width:5%">
+    <input id="commission" type="text" style="width:5%">%
     <label for="netPercentage">Net Percentage:</label>
-    <input id="netPercentage" type="text" style="width:5%">
+    <input id="netPercentage" type="text" style="width:5%">%
     <label>Monthly:</label>
     <input id="monthly" type="radio" name="frequency" value="monthly">
     <label>Individual:</label>
@@ -73,7 +74,7 @@
     <input id="expense-name" type="text">
     <label for="quantity">Quantity:</label>
     <input id="quantity" type="text" style="width:5%">
-    <label for="cost">Cost:</label>
+    <label for="cost">Cost: $</label>
     <input id="cost" type="text" style="width:5%">
     <label>Monthly:</label>
     <input id="exp-monthly" type="radio" name="frequency" value="monthly">
@@ -144,7 +145,20 @@
         <td></td>
         <td></td>
       </tr>
-  </table>  
+  </table><br>
+  <h2>Calculations:</h2>
+  <h3>Price = Cost/(1 - Net Percentage - Commission)</h3>
+  <p>Example: Cost = $10, Commission = 10%, Net Percentage = 50%<br><br>
+    $10/(1 - 0.5 - 0.1) = $25</p>
+  <h3>Profit Per Sale = Price - Cost - Commission</h3>
+  <p>Example: Cost = $10, Commission = 10%, Price = $25<br><br>
+    $25 - $10 - ($25*0.1) = $12.50</p>
+  <h3>Net Profit(Totals) = Revenue - Cost - Commission</h3>
+  <p>Example: Cost = $200, Commission = $200, Revenue = $2000<br><br>
+    $2000 - $200 - $200 = $1600</p>
+  <h3>Net Profit Percentage(Totals) = Net Profit/Revenue</h3>
+  <p>Example: Net Profit = $1600, Revenue = $2000<br><br>
+    $1600/$2000 = 80%</p>  
   <script type="application/javascript" src="javascripts/index.js" charset="UTF-8"></script>
   <script type="application/javascript" src="javascripts/calculator.js" charset="UTF-8"></script>
   <script type="application/javascript" src="javascripts/product.js" charset="UTF-8"></script>
