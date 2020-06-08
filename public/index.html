@@ -6,6 +6,17 @@
     <title></title>
   </head>
   <body>
+    <h1>Profit and Pricing Strategy Calculator</h1>
+    <ul>Definitions:
+      <li>Sales - Number of sales for a product. This will be used to calculate totals.</li>
+      <li>Product Cost - Cost to make a product. This will be subtracted from price to calculate profit. It will also be added to expenses in totals.</li>
+      <li>Expense Cost - Cost for an expense. This is how much you need to pay for anything not associated with a sale. It will also be added to expenses in totals.</li>
+      <li>Commission - Percent of a sale for a product that an employee would be paid. This is an expense and will be subtracted from the total profit.</li>
+      <li>Net Percentage - Percent of price you make as profit. This input will be used to generate price.</li>
+      <li>Price - Generated sales price for a product. This is an output from commission, cost and net percentage generated automatically</li>
+      <li>Frequency - Recurring(monthly) or One-time(individual). This will determine whether something is used once or added multiple times in the totals.</li>
+      <li>Quantity - Number of expenses. This will be used to calculate totals.</li>
+    </ul><br>
    <label for="calc">Choose Calculator:</label>
     <select name="calculator" id="calc"></select><br><br>
   <form id="new-calc">

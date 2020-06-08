@@ -2,6 +2,14 @@ h1 {
     text-align: center;
 }
 
+ul {
+    font-weight: bold;
+}
+
+li {
+    text-indent: 50px;
+}
+
 table, th {
     border: 1px solid black;
     text-align: center;
