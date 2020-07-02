@@ -1,5 +1,5 @@
-//const BACKEND_URL = 'http://localhost:3000';
-const BACKEND_URL = 'https://enteraction-calculator.herokuapp.com/';
+const BACKEND_URL = 'http://localhost:3000';
+//const BACKEND_URL = 'https://enteraction-calculator.herokuapp.com/';
 var individualProductExpenses;
 var monthlyProductExpenses;
 

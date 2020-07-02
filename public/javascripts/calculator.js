@@ -50,16 +50,6 @@ class Calculator {
         .then(json => this.allProducts(json["data"]))
     }
 
-    static all(json) {
-        const main = document.getElementById('calc')
-        json.forEach(calculator => {
-            const opt = document.createElement('option');
-            opt.innerHTML = `${calculator["attributes"]['name']}`;
-            opt.id = `${calculator['attributes']['id']}`      
-            main.appendChild(opt);
-        })
-    }
-
     static addCalc(json) {
         if (json['attributes']['id']) {
             const nameInput = document.getElementById('calc-name')
