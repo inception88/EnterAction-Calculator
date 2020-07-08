@@ -157,6 +157,9 @@ class Product {
             
         fetch(`${BACKEND_URL}/products`, configObj)
             .then(function(response) {
+       //         if (!response.ok) {
+       //             throw new Error(response.data.error);
+       //         }
             return response.json();
             })
             .then(function(json) {

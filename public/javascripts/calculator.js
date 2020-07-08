@@ -32,6 +32,11 @@ class Calculator {
             if (row.id)
                 row.remove()
         })
+        json.sort(function(a, b){
+            if(a['attributes']['name'] < b['attributes']['name']) { return -1; }
+            if(a['attributes']['name'] > b['attributes']['name']) { return 1; }
+            return 0;
+        })
         json.forEach(product => {
             Product.addProduct(product)
         })

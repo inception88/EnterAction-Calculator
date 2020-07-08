@@ -12,7 +12,8 @@ class ProductsController < ApplicationController
         if product.save
             render json: ProductSerializer.new(product) 
         else
-            render json: {data: {error: product.errors}}
+            render json: {data: {error: product.errors}},
+            status: 400
         end
     end
 
